@@ -16,22 +16,22 @@ public class InputHandler implements KeyListener {
 
         if (key == KeyEvent.VK_UP)
         {
-            Game.game.p.dY = -1;
+        	Game.game.paddle1.dY = -2;
         }
 
         if (key == KeyEvent.VK_DOWN)
         {
-        	Game.game.p.dY = 1;
+        	Game.game.paddle1.dY = 2;
         }
         
         if (key == KeyEvent.VK_W)
         {
-            Game.game.p2.dY = -1;
+            Game.game.paddle2.dY = -2;
         }
 
         if (key == KeyEvent.VK_S)
         {
-        	Game.game.p2.dY = 1;
+        	Game.game.paddle2.dY = 2;
         }
 		
 	}
@@ -42,22 +42,22 @@ public class InputHandler implements KeyListener {
 
         if (key == KeyEvent.VK_UP)
         {
-        	Game.game.p.dY = 0;
+        	Game.game.paddle1.dY = 0;
         }
 
         if (key == KeyEvent.VK_DOWN)
         {
-        	Game.game.p.dY = 0;
+        	Game.game.paddle1.dY = 0;
         }
         
         if (key == KeyEvent.VK_W)
         {
-        	Game.game.p2.dY = 0;
+        	Game.game.paddle2.dY = 0;
         }
 
         if (key == KeyEvent.VK_S)
         {
-        	Game.game.p2.dY = 0;
+        	Game.game.paddle2.dY = 0;
         }
 		
 	}
