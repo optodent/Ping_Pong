@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
@@ -53,6 +54,7 @@ public class Paddle extends Collidable{
 	}
 	
 	public void paint(Graphics2D g) {
-		g.drawRect(positionX, positionY, PADDLE_WIDTH, PADDLE_HEIGHT);
+		g.setColor(new Color(255, 51, 0));
+		g.fillRect(positionX, positionY, PADDLE_WIDTH, PADDLE_HEIGHT);
 	}
 }

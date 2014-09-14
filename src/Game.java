@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,8 +15,8 @@ public class Game extends JPanel{
 
 	public static Game game;
 	
-	public static final int GAME_HEIGHT = 350;
-	public static final int GAME_WIDTH = 600;
+	public static final int GAME_HEIGHT = 300;
+	public static final int GAME_WIDTH = 500;
 	
 	public Ball ball;
 	public Paddle paddle1;
@@ -60,7 +61,11 @@ public class Game extends JPanel{
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 
-		ball.paint(g2d);
+		try {
+			ball.paint(g2d);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		paddle1.paint(g2d);
 		paddle2.paint(g2d);
 	}
