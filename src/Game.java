@@ -1,13 +1,14 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.io.IOException;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.sun.glass.ui.Timer;
 
 public class Game extends JPanel{
 	
@@ -34,15 +35,25 @@ public class Game extends JPanel{
 		paddle2 = new Paddle(this, GAME_WIDTH - 5 - Paddle.PADDLE_WIDTH, GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
 		JFrame frame = new JFrame("PingPong");
 		frame.add(this);	
-		frame.setSize(GAME_WIDTH + 1, GAME_HEIGHT);
+		frame.setSize(GAME_WIDTH + 1, GAME_HEIGHT + 50);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		InputHandler ih = new InputHandler();
 		frame.addKeyListener(ih);
-
+		
+	
+		JLabel text = new JLabel("This is a label");
+		//JPanel panelScore = new JPanel();
+		text.setBounds(0, GAME_HEIGHT + 10, GAME_WIDTH, 30);
+		//panelScore.add(text);
+		//panelScore.setBounds(0, GAME_HEIGHT + 10, GAME_WIDTH, 40);
+		//text.setLayout(null);
+		
+		frame.getContentPane().add(text);
+		//frame.setSize(GAME_WIDTH, GAME_HEIGHT + 80);	
 		ImagePanel panel = new ImagePanel("images/background.png");
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		frame.setSize(GAME_WIDTH, GAME_HEIGHT);	
+		frame.setSize(GAME_WIDTH + 1, GAME_HEIGHT + 70);	
 	}
 	private void detectCollisions(){
 		
