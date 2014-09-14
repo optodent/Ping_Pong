@@ -12,13 +12,11 @@ import javax.imageio.ImageIO;
 
 public class Ball extends Collidable{
 	
-	
 	protected int vellX; 	//velocity direction x
 	protected int vellY;	// velocity direction y
 	
 	private Game game;
 	private static Integer lastScore;
-	private long lastScoreTime = System.currentTimeMillis();
 	
 	//constructor for ball
 	public Ball(Game game) {
@@ -81,7 +79,7 @@ public class Ball extends Collidable{
 			
 			game.setScorePlayer2(sc);
 			game.setScoreMessage(2);
-			lastScoreTime = System.currentTimeMillis();
+			game.lastScoreTime = System.currentTimeMillis();
 		}
 			
 		if (positionX + vellX > Game.GAME_WIDTH - 10){
@@ -94,17 +92,13 @@ public class Ball extends Collidable{
 			
 			game.setScorePlayer1(sc);
 			game.setScoreMessage(1);
-			lastScoreTime = System.nanoTime();
+			game.lastScoreTime = System.nanoTime();
 		}
 		if (positionY + vellY < 0)
 			vellY = 1;
 		if (positionY + vellY > Game.GAME_HEIGHT - 10)
 			vellY = -1;
-		
-		if (System.currentTimeMillis() - lastScoreTime > 2000) {
-			game.deleteScoreMessage();
-		}
-		
+			
 		positionX = positionX + vellX;
 		positionY = positionY + vellY;
 	}

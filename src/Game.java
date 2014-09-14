@@ -17,12 +17,14 @@ public class Game extends JPanel{
 	
 	public static final int GAME_HEIGHT = 350;
 	public static final int GAME_WIDTH = 600;
-	public static final int SLEEP_TIME = 10;
+	public static final int SLEEP_TIME = 30;
+	private static final int SCORE_MESSAGE_SHOWTIME = 2000;
 	
 	public Ball ball;
 	public Timere timer;
 	public Paddle paddle1;
 	public Paddle paddle2;
+	public long lastScoreTime = System.currentTimeMillis();
 	
 	private JLabel scoreMessage;
 	private JLabel scorePlayer1;
@@ -75,6 +77,9 @@ public class Game extends JPanel{
 		ball.move();
 		paddle1.move();
 		paddle2.move();
+		if (System.currentTimeMillis() - lastScoreTime > SCORE_MESSAGE_SHOWTIME) {
+			game.deleteScoreMessage();
+		}
 	}
 	
 	public void setScorePlayer1(int score){
@@ -130,14 +135,18 @@ public class Game extends JPanel{
 		Game.running = false;
 		
 		while(game.paddle1.getScore() < 6 && game.paddle2.getScore() < 6){
-
+			
+			long before = System.nanoTime();
 			if (running) {
 				game.move();
 				game.repaint();
 				game.detectCollisions();
 				game.timeRefresh();
 			}
-			Thread.sleep(SLEEP_TIME);
+			long now = System.nanoTime();
+			long elapsed = Math.round((now - before) / 1000000.0);
+
+			Thread.sleep(SLEEP_TIME - elapsed);
 		}	
 	}	
 
