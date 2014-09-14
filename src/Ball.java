@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+
 public class Ball extends Collidable{
 	
 	
@@ -32,6 +33,7 @@ public class Ball extends Collidable{
 			sc++;
 			game.paddle2.setScore(sc);		
 			game.ball = new Ball(game);
+			game.setScorePlayer2(sc);		
 		}
 			
 		if (positionX + vellX > game.getWidth() - 10){
@@ -40,6 +42,7 @@ public class Ball extends Collidable{
 			sc++;
 			game.paddle1.setScore(sc);
 			game.ball = new Ball(game);
+			game.setScorePlayer1(sc);
 		}
 		if (positionY + vellY < 0)
 			vellY = 1;

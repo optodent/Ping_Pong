@@ -24,6 +24,10 @@ public class Game extends JPanel{
 	public Paddle paddle1;
 	public Paddle paddle2;
 	
+	private JLabel scorePlayer1;
+	private JLabel scorePlayer2;
+	private JFrame frame;
+	
 	public static boolean running = true;
 	
 	public Game(){
@@ -32,18 +36,22 @@ public class Game extends JPanel{
 		
 		paddle1 = new Paddle(this, 10 , GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
 		paddle2 = new Paddle(this, GAME_WIDTH - 5 - Paddle.PADDLE_WIDTH - 5, GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
-		JFrame frame = new JFrame("PingPong");
+		frame = new JFrame("PingPong");
 		frame.add(this);	
-		frame.setSize(GAME_WIDTH, GAME_HEIGHT + 70);
+		frame.setSize(GAME_WIDTH, GAME_HEIGHT + 60);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		InputHandler ih = new InputHandler();
 		frame.addKeyListener(ih);
 		frame.setLayout(null);
 	
-		JLabel text = new JLabel("Score: " + "0");	
-		text.setBounds(0, GAME_HEIGHT, GAME_WIDTH, 30);		
-		frame.getContentPane().add(text);
+		scorePlayer1 = new JLabel("Score: " + 0);	
+		scorePlayer1.setBounds(0, GAME_HEIGHT, GAME_WIDTH / 4, 30);		
+		frame.getContentPane().add(scorePlayer1);
+		
+		scorePlayer2 = new JLabel("Score: " + 0);	
+		scorePlayer2.setBounds(GAME_WIDTH / 2, GAME_HEIGHT, GAME_WIDTH / 4, 30);		
+		frame.getContentPane().add(scorePlayer2);
 		
 		ImagePanel panel = new ImagePanel("images/background.png");
 		panel.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
@@ -66,6 +74,20 @@ public class Game extends JPanel{
 		paddle2.move();
 	}
 	
+	public void setScorePlayer1(int score){
+		frame.getContentPane().remove(scorePlayer1);
+		scorePlayer1 = new JLabel("Score: " + score);
+		scorePlayer1.setBounds(0, GAME_HEIGHT, GAME_WIDTH / 4, 30);
+		frame.getContentPane().add(scorePlayer1);
+	}
+	
+	public void setScorePlayer2(int score){
+		frame.getContentPane().remove(scorePlayer2);
+		scorePlayer2 = new JLabel("Score: " + score);
+		scorePlayer2.setBounds(GAME_WIDTH / 2, GAME_HEIGHT, GAME_WIDTH / 4, 30);
+		frame.getContentPane().add(scorePlayer2);
+	}
+
 	private void timeRefresh () {
 		timer.refresh();
 	}
@@ -92,7 +114,7 @@ public class Game extends JPanel{
 		
 		game = new Game();
 		game.setOpaque(false); //hides the background of game
-		game.running = false;
+		Game.running = false;
 		
 		while(game.paddle1.getScore() < 6 && game.paddle2.getScore() < 6){
 
