@@ -7,23 +7,20 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.sun.glass.ui.Timer;
+
 public class Game extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 
 	public static Game game;
 	
-<<<<<<< HEAD
-	public static final int GAME_HEIGHT = 300;
-	public static final int GAME_WIDTH = 500;
-=======
 	public static final int GAME_HEIGHT = 350;
 	public static final int GAME_WIDTH = 600;
 	public static final int SLEEP_TIME = 10;
->>>>>>> 79864564dc9239d864de4f322312611e366fc8dd
 	
 	public Ball ball;
-	public Timer timer;
+	public Timere timer;
 	public Paddle paddle1;
 	public Paddle paddle2;
 	
@@ -31,7 +28,7 @@ public class Game extends JPanel{
 	
 	public Game(){
 		ball = new Ball(this);
-		timer = new Timer();
+		timer = new Timere();
 		
 		paddle1 = new Paddle(this, 5 , GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
 		paddle2 = new Paddle(this, GAME_WIDTH - 5 - Paddle.PADDLE_WIDTH, GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
@@ -72,16 +69,13 @@ public class Game extends JPanel{
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-<<<<<<< HEAD
 		try {
 			ball.paint(g2d);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-=======
-		ball.paint(g2d);
+
 		timer.paint(g2d);
->>>>>>> 79864564dc9239d864de4f322312611e366fc8dd
 		paddle1.paint(g2d);
 		paddle2.paint(g2d);
 	}
