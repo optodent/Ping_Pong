@@ -3,7 +3,7 @@ import java.awt.Graphics2D;
 import java.awt.font.TextAttribute;
 import java.text.AttributedString;
 
-public class Timer {
+public class Timere {
 	private long currentTime = 0;
 	
 	void refresh() {
