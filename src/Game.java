@@ -21,6 +21,8 @@ public class Game extends JPanel{
 	public Paddle paddle1;
 	public Paddle paddle2;
 	
+	public static boolean running = true;
+	
 	public Game(){
 		ball = new Ball(this);
 		paddle1 = new Paddle(this, 5 , GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
@@ -71,11 +73,12 @@ public class Game extends JPanel{
 		game.setOpaque(false); //hides the background of game
 		
 		while(true){
-			
-			game.move();
-			game.repaint();
+			if (running) {
+				game.move();
+				game.repaint();
+				game.detectCollisions();
+			}
 			Thread.sleep(10);
-			game.detectCollisions();
 		}	
 	}	
 }
