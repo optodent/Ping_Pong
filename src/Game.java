@@ -86,8 +86,9 @@ public class Game extends JPanel{
 		
 		game = new Game();
 		game.setOpaque(false); //hides the background of game
+		game.running = false;
 		
-		while(true){
+		while(game.paddle1.getScore() < 6 && game.paddle2.getScore() < 6){
 
 			if (running) {
 				game.move();
