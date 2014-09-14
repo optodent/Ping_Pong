@@ -5,6 +5,7 @@ import java.awt.TexturePaint;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -12,19 +13,35 @@ import javax.imageio.ImageIO;
 public class Ball extends Collidable{
 	
 	
-	protected int vellX = 1; 	//velocity direction x
-	protected int vellY = 1;	// velocity direction y
+	protected int vellX; 	//velocity direction x
+	protected int vellY;	// velocity direction y
 	
 	private Game game;
 
 	//constructor for ball
 	public Ball(Game game) {
-		
 		this.game = game;
 		this.min = new Point(0 , 0);
 		this.max = new Point(10 , 10);
 		
+		Random rnd = new Random();
+		int direction = rnd.nextInt(4);
+		switch (direction){
+			case 3:
+				vellX = 1;
+				vellY = -1; break;
+			case 2:
+				vellX = -1;
+				vellY = 1; break;	
+			case 1:
+					vellX = 1;
+					vellY = 1; break;
+			case 0:
+				vellX = -1;
+				vellY = -1; break;
+		}	
 	}
+	
 	//method moving the ball
 	void move() {
 		if (positionX + vellX < 0){
