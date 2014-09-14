@@ -1,11 +1,9 @@
 import java.awt.BorderLayout;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Game extends JPanel{
@@ -16,6 +14,7 @@ public class Game extends JPanel{
 	
 	public static final int GAME_HEIGHT = 350;
 	public static final int GAME_WIDTH = 600;
+	public static final int SLEEP_TIME = 10;
 	
 	public Ball ball;
 	public Timer timer;
@@ -85,7 +84,7 @@ public class Game extends JPanel{
 				game.detectCollisions();
 				game.timeRefresh();
 			}
-			Thread.sleep(10);
+			Thread.sleep(SLEEP_TIME);
 		}	
 	}	
 }

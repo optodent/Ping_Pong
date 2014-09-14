@@ -11,8 +11,8 @@ public class Timer {
 	}
 	
 	public void paint(Graphics2D g) {
-		
-		long counter = currentTime / 100;
+		//The precedence is important. Do NOT remove the brackets.
+		long counter = currentTime / (1000 / Game.SLEEP_TIME);
 		long remainder = counter % 3600;
 		long minutes = remainder / 60;
 		long seconds = remainder % 60; 
