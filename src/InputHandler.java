@@ -27,6 +27,11 @@ public class InputHandler implements KeyListener {
         {
         	Game.game.paddle1.setdY(2);
         }
+        
+        if (key == KeyEvent.VK_SPACE)
+        {
+        	Game.running = ! Game.running;
+        }
 		
 	}
 

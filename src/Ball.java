@@ -48,7 +48,7 @@ public class Ball extends Collidable{
 		TexturePaint texture = 
 		 new TexturePaint(ball, 
 		          new Rectangle(0, 0, width, height));
-		 g.setPaint(texture);
+		g.setPaint(texture);
 		g.fillOval(positionX, positionY, 10, 10);
 	}
 }
