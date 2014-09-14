@@ -18,6 +18,7 @@ public class Ball extends Collidable{
 	
 	private Game game;
 	private static Integer lastScore;
+	private long lastScoreTime = System.currentTimeMillis();
 	
 	//constructor for ball
 	public Ball(Game game) {
@@ -77,7 +78,10 @@ public class Ball extends Collidable{
 			game.paddle2.setScore(sc);
 			lastScore = 2;
 			game.ball = new Ball(game);
+			
 			game.setScorePlayer2(sc);
+			game.setScoreMessage(2);
+			lastScoreTime = System.currentTimeMillis();
 		}
 			
 		if (positionX + vellX > Game.GAME_WIDTH - 10){
@@ -87,13 +91,19 @@ public class Ball extends Collidable{
 			game.paddle1.setScore(sc);
 			lastScore = 1;
 			game.ball = new Ball(game);
+			
 			game.setScorePlayer1(sc);
+			game.setScoreMessage(1);
+			lastScoreTime = System.nanoTime();
 		}
 		if (positionY + vellY < 0)
 			vellY = 1;
 		if (positionY + vellY > Game.GAME_HEIGHT - 10)
 			vellY = -1;
 		
+		if (System.currentTimeMillis() - lastScoreTime > 2000) {
+			game.deleteScoreMessage();
+		}
 		
 		positionX = positionX + vellX;
 		positionY = positionY + vellY;

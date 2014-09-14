@@ -24,6 +24,7 @@ public class Game extends JPanel{
 	public Paddle paddle1;
 	public Paddle paddle2;
 	
+	private JLabel scoreMessage;
 	private JLabel scorePlayer1;
 	private JLabel scorePlayer2;
 	private JFrame frame;
@@ -52,6 +53,8 @@ public class Game extends JPanel{
 		scorePlayer2 = new JLabel("Score: " + 0);	
 		scorePlayer2.setBounds(GAME_WIDTH / 8 * 7, GAME_HEIGHT, GAME_WIDTH / 8, 30);		
 		frame.getContentPane().add(scorePlayer2);
+		
+		scoreMessage = new JLabel();
 		
 		ImagePanel panel = new ImagePanel("images/background.png");
 		panel.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
@@ -87,6 +90,16 @@ public class Game extends JPanel{
 		scorePlayer2.setBounds(GAME_WIDTH / 8 * 7, GAME_HEIGHT, GAME_WIDTH / 8, 30);
 		frame.getContentPane().add(scorePlayer2);
 	}
+	
+	public void setScoreMessage(int player){
+		scoreMessage = new JLabel("Player " + player + " scored a goal !!!");
+		scoreMessage.setBounds(GAME_WIDTH / 8 * 3, GAME_HEIGHT, GAME_WIDTH / 2, 30);
+		frame.getContentPane().add(scoreMessage);
+	}
+	
+	public void deleteScoreMessage(){
+		frame.getContentPane().remove(scoreMessage);
+	}
 
 	private void timeRefresh () {
 		timer.refresh();
@@ -113,7 +126,7 @@ public class Game extends JPanel{
 	public static void main(String[] args) throws InterruptedException {
 		
 		game = new Game();
-		game.setOpaque(false); //hides the background of game
+		game.setOpaque(false); 
 		Game.running = false;
 		
 		while(game.paddle1.getScore() < 6 && game.paddle2.getScore() < 6){
