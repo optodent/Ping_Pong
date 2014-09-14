@@ -1,5 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -31,29 +30,25 @@ public class Game extends JPanel{
 		ball = new Ball(this);
 		timer = new Timere();
 		
-		paddle1 = new Paddle(this, 5 , GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
-		paddle2 = new Paddle(this, GAME_WIDTH - 5 - Paddle.PADDLE_WIDTH, GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
+		paddle1 = new Paddle(this, 10 , GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
+		paddle2 = new Paddle(this, GAME_WIDTH - 5 - Paddle.PADDLE_WIDTH - 5, GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
 		JFrame frame = new JFrame("PingPong");
 		frame.add(this);	
-		frame.setSize(GAME_WIDTH + 1, GAME_HEIGHT + 50);
+		frame.setSize(GAME_WIDTH, GAME_HEIGHT + 70);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		InputHandler ih = new InputHandler();
 		frame.addKeyListener(ih);
-		
+		frame.setLayout(null);
 	
-		JLabel text = new JLabel("This is a label");
-		//JPanel panelScore = new JPanel();
-		text.setBounds(0, GAME_HEIGHT + 10, GAME_WIDTH, 30);
-		//panelScore.add(text);
-		//panelScore.setBounds(0, GAME_HEIGHT + 10, GAME_WIDTH, 40);
-		//text.setLayout(null);
-		
+		JLabel text = new JLabel("Score: " + "0");	
+		text.setBounds(0, GAME_HEIGHT, GAME_WIDTH, 30);		
 		frame.getContentPane().add(text);
-		//frame.setSize(GAME_WIDTH, GAME_HEIGHT + 80);	
+		
 		ImagePanel panel = new ImagePanel("images/background.png");
+		panel.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		frame.setSize(GAME_WIDTH + 1, GAME_HEIGHT + 70);	
+		
 	}
 	private void detectCollisions(){
 		
@@ -80,6 +75,7 @@ public class Game extends JPanel{
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+
 		try {
 			ball.paint(g2d);
 		} catch (IOException e) {
@@ -87,6 +83,7 @@ public class Game extends JPanel{
 		}
 
 		timer.paint(g2d);
+
 		paddle1.paint(g2d);
 		paddle2.paint(g2d);
 	}
@@ -95,8 +92,10 @@ public class Game extends JPanel{
 		
 		game = new Game();
 		game.setOpaque(false); //hides the background of game
+		game.running = false;
 		
-		while(true){
+		while(game.paddle1.getScore() < 6 && game.paddle2.getScore() < 6){
+
 			if (running) {
 				game.move();
 				game.repaint();
@@ -106,4 +105,5 @@ public class Game extends JPanel{
 			Thread.sleep(SLEEP_TIME);
 		}	
 	}	
+
 }

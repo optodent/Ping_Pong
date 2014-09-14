@@ -5,8 +5,8 @@ public class Collidable {
 	protected Point min;
 	protected Point max;
 	
-	protected int positionX = 0; 
-	protected int positionY = 0;	
+	protected int positionX = Game.GAME_WIDTH /2; 
+	protected int positionY = Game.GAME_HEIGHT/2;	
 	
 	public boolean Intersect(Collidable other) {
 

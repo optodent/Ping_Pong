@@ -5,6 +5,8 @@ import java.awt.Point;
 
 public class Paddle extends Collidable{
 	
+	private int score = 0;
+	
 	public static final int PADDLE_HEIGHT = 50;
 	public static final int PADDLE_WIDTH = 10;
 	private int dY;
@@ -41,12 +43,19 @@ public class Paddle extends Collidable{
 		return this.positionY;
 	}
 	
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
 	public void move(){
 		
 		if ((this.positionY + dY) < 0) {
 			positionY = 0;
-		}else if ((this.positionY + dY) > Game.game.getHeight() - PADDLE_HEIGHT + 1){
-			positionY = Game.game.getHeight() - PADDLE_HEIGHT + 1;
+		}else if ((this.positionY + dY) > Game.GAME_HEIGHT - PADDLE_HEIGHT + 1){
+			positionY = Game.GAME_HEIGHT - PADDLE_HEIGHT + 1;
 		}else{
 			positionY += dY;
 		}
@@ -57,4 +66,6 @@ public class Paddle extends Collidable{
 		g.setColor(new Color(255, 51, 0));
 		g.fillRect(positionX, positionY, PADDLE_WIDTH, PADDLE_HEIGHT);
 	}
+
+	
 }
