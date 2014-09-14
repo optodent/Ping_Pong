@@ -46,11 +46,11 @@ public class Game extends JPanel{
 		frame.setLayout(null);
 	
 		scorePlayer1 = new JLabel("Score: " + 0);	
-		scorePlayer1.setBounds(0, GAME_HEIGHT, GAME_WIDTH / 4, 30);		
+		scorePlayer1.setBounds(15, GAME_HEIGHT, GAME_WIDTH / 8, 30);		
 		frame.getContentPane().add(scorePlayer1);
 		
 		scorePlayer2 = new JLabel("Score: " + 0);	
-		scorePlayer2.setBounds(GAME_WIDTH / 2, GAME_HEIGHT, GAME_WIDTH / 4, 30);		
+		scorePlayer2.setBounds(GAME_WIDTH / 8 * 7, GAME_HEIGHT, GAME_WIDTH / 8, 30);		
 		frame.getContentPane().add(scorePlayer2);
 		
 		ImagePanel panel = new ImagePanel("images/background.png");
@@ -77,14 +77,14 @@ public class Game extends JPanel{
 	public void setScorePlayer1(int score){
 		frame.getContentPane().remove(scorePlayer1);
 		scorePlayer1 = new JLabel("Score: " + score);
-		scorePlayer1.setBounds(0, GAME_HEIGHT, GAME_WIDTH / 4, 30);
+		scorePlayer1.setBounds(15, GAME_HEIGHT, GAME_WIDTH / 8, 30);
 		frame.getContentPane().add(scorePlayer1);
 	}
 	
 	public void setScorePlayer2(int score){
 		frame.getContentPane().remove(scorePlayer2);
 		scorePlayer2 = new JLabel("Score: " + score);
-		scorePlayer2.setBounds(GAME_WIDTH / 2, GAME_HEIGHT, GAME_WIDTH / 4, 30);
+		scorePlayer2.setBounds(GAME_WIDTH / 8 * 7, GAME_HEIGHT, GAME_WIDTH / 8, 30);
 		frame.getContentPane().add(scorePlayer2);
 	}
 

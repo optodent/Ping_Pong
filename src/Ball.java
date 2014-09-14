@@ -17,7 +17,8 @@ public class Ball extends Collidable{
 	protected int vellY;	// velocity direction y
 	
 	private Game game;
-
+	private static Integer lastScore;
+	
 	//constructor for ball
 	public Ball(Game game) {
 		this.game = game;
@@ -26,20 +27,45 @@ public class Ball extends Collidable{
 		
 		Random rnd = new Random();
 		int direction = rnd.nextInt(4);
-		switch (direction){
-			case 3:
-				vellX = 1;
-				vellY = -1; break;
-			case 2:
-				vellX = -1;
-				vellY = 1; break;	
-			case 1:
+		
+		if (lastScore == null){
+			switch (direction){
+				case 0:
 					vellX = 1;
 					vellY = 1; break;
-			case 0:
-				vellX = -1;
-				vellY = -1; break;
-		}	
+				case 1:
+					vellX = 1;
+					vellY = -1; break;
+				case 2:
+					vellX = -1;
+					vellY = -1; break;
+				case 3:
+					vellX = -1;
+					vellY = 1; break;
+			}		
+		} else if (lastScore == 2) {
+			switch (direction){
+				case 0:
+				case 1:
+					vellX = 1;
+					vellY = 1; break;
+				case 2:
+				case 3:
+					vellX = 1;
+					vellY = -1; break;
+			}		
+		} else{
+			switch (direction){
+				case 0:
+				case 1:
+					vellX = -1;
+					vellY = -1; break;
+				case 2:
+				case 3:
+					vellX = -1;
+					vellY = 1; break;
+			}
+		}
 	}
 	
 	//method moving the ball
@@ -48,16 +74,18 @@ public class Ball extends Collidable{
 			vellX = 1;
 			int sc = game.paddle2.getScore();
 			sc++;
-			game.paddle2.setScore(sc);		
+			game.paddle2.setScore(sc);
+			lastScore = 2;
 			game.ball = new Ball(game);
-			game.setScorePlayer2(sc);		
+			game.setScorePlayer2(sc);
 		}
 			
-		if (positionX + vellX > game.getWidth() - 10){
+		if (positionX + vellX > Game.GAME_WIDTH - 10){
 			vellX = -1;
 			int sc = game.paddle1.getScore();
 			sc++;
 			game.paddle1.setScore(sc);
+			lastScore = 1;
 			game.ball = new Ball(game);
 			game.setScorePlayer1(sc);
 		}
@@ -81,6 +109,6 @@ public class Ball extends Collidable{
 		 new TexturePaint(ball, 
 		          new Rectangle(0, 0, width, height));
 		g.setPaint(texture);
-		g.fillOval(positionX, positionY, 10, 10);
+		g.fillOval(positionX - 5, positionY - 5, 10, 10);
 	}
 }
