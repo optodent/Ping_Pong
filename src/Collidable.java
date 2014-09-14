@@ -5,8 +5,8 @@ public class Collidable {
 	protected Point min;
 	protected Point max;
 	
-	protected int positionX = 0; 
-	protected int positionY = 0;	
+	protected int positionX = 5; 
+	protected int positionY = 5;	
 	
 	public boolean Intersect(Collidable other) {
 

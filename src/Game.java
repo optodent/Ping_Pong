@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
-
 public class Game extends JPanel{
 	
 	/**
@@ -68,7 +67,7 @@ public class Game extends JPanel{
 			
 			game.move();
 			game.repaint();
-			Thread.sleep(10);
+			Thread.sleep(5);
 			game.detectCollisions();
 		}
 		
