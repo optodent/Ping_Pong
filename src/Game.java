@@ -13,16 +13,21 @@ import javax.swing.JPanel;
 
 public class Game extends JPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static Game game;
 	
-	public Ball b;
-	public Padle p;
-	public Padle p2;
+	public Ball ball;
+	public Paddle paddle1;
+	public Paddle paddle2;
 	
 	public Game(){
-		b = new Ball(this);
-		p = new Padle(this, 5 , 150);
-		p2 = new Padle(this, 200, 150);
+		ball = new Ball(this);
+		paddle1 = new Paddle(this, 5 , 150);
+		paddle2 = new Paddle(this, 268, 150);
 		JFrame panel = new JFrame("PingPong");
 		panel.add(this);	
 		panel.setSize(700, 350);
@@ -36,12 +41,20 @@ public class Game extends JPanel{
 		panel.setSize(600, 350);
 	
 	}
-	
+	private void detectCollisions(){
+		
+		if (ball.Intersect(paddle1)) {
+			ball.vellX  = +1;
+		}
+		if (ball.Intersect(paddle2)) {
+			ball.vellX  = -1;
+		}
+	}
 	
 	private void move(){
-		b.move();
-		p.move();
-		p2.move();
+		ball.move();
+		paddle1.move();
+		paddle2.move();
 	}
 	
 	public void paint(Graphics g) {
@@ -49,10 +62,10 @@ public class Game extends JPanel{
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		b.paint(g2d);
-		p.paint(g2d);
-		p2.paint(g2d);
-		
+
+		ball.paint(g2d);
+		paddle1.paint(g2d);
+		paddle2.paint(g2d);
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
@@ -65,7 +78,7 @@ public class Game extends JPanel{
 			game.move();
 			game.repaint();
 			Thread.sleep(10);
+			game.detectCollisions();
 		}	
 	}	
-	
 }
