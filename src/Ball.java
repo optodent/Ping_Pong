@@ -26,15 +26,25 @@ public class Ball extends Collidable{
 	}
 	//method moving the ball
 	void move() {
-		if (positionX + vellX < 0)
+		if (positionX + vellX < 0){
 			vellX = 1;
-		if (positionX + vellX > game.getWidth() - 10)
+			int s  = 1;
+			game.paddle2.setScore(s++);	
+			game.ball = new Ball(game);
+		}
+			
+		if (positionX + vellX > game.getWidth() - 10){
 			vellX = -1;
+			int s = 1;
+			game.paddle1.setScore(s++);
+			game.ball = new Ball(game);
+		}
 		if (positionY + vellY < 0)
 			vellY = 1;
 		if (positionY + vellY > game.getHeight() - 10)
 			vellY = -1;
-
+		
+		
 		positionX = positionX + vellX;
 		positionY = positionY + vellY;
 	}

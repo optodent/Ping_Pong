@@ -14,8 +14,6 @@ public class Game extends JPanel{
 
 	public static Game game;
 	
-
-
 	public static final int GAME_HEIGHT = 350;
 	public static final int GAME_WIDTH = 600;
 	public static final int SLEEP_TIME = 10;
@@ -33,7 +31,7 @@ public class Game extends JPanel{
 		timer = new Timere();
 		
 		paddle1 = new Paddle(this, 5 , GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
-		paddle2 = new Paddle(this, GAME_WIDTH - 5 - Paddle.PADDLE_WIDTH, GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
+		paddle2 = new Paddle(this, GAME_WIDTH - 5 - Paddle.PADDLE_WIDTH - 10, GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
 		JFrame frame = new JFrame("PingPong");
 		frame.add(this);	
 		frame.setSize(GAME_WIDTH + 1, GAME_HEIGHT);
