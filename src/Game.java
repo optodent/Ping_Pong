@@ -1,12 +1,12 @@
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-
 
 public class Game extends JPanel{
 	
@@ -18,6 +18,7 @@ public class Game extends JPanel{
 	public static final int GAME_WIDTH = 600;
 	
 	public Ball ball;
+	public Timer timer;
 	public Paddle paddle1;
 	public Paddle paddle2;
 	
@@ -25,6 +26,8 @@ public class Game extends JPanel{
 	
 	public Game(){
 		ball = new Ball(this);
+		timer = new Timer();
+		
 		paddle1 = new Paddle(this, 5 , GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
 		paddle2 = new Paddle(this, GAME_WIDTH - 5 - Paddle.PADDLE_WIDTH, GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
 		JFrame frame = new JFrame("PingPong");
@@ -37,8 +40,7 @@ public class Game extends JPanel{
 
 		ImagePanel panel = new ImagePanel("images/background.png");
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		frame.setSize(GAME_WIDTH, GAME_HEIGHT);
-	
+		frame.setSize(GAME_WIDTH, GAME_HEIGHT);	
 	}
 	private void detectCollisions(){
 		
@@ -56,13 +58,17 @@ public class Game extends JPanel{
 		paddle2.move();
 	}
 	
+	private void timeRefresh () {
+		timer.refresh();
+	}
+	
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		ball.paint(g2d);
+		timer.paint(g2d);
 		paddle1.paint(g2d);
 		paddle2.paint(g2d);
 	}
@@ -77,6 +83,7 @@ public class Game extends JPanel{
 				game.move();
 				game.repaint();
 				game.detectCollisions();
+				game.timeRefresh();
 			}
 			Thread.sleep(10);
 		}	
