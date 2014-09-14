@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 
+@SuppressWarnings("serial")
 public class ImagePanel extends JPanel {
 
     private Image image = null;
@@ -17,6 +18,6 @@ public class ImagePanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
        
-        g.drawImage(image, 0, 0, 600, 350, null);
+        g.drawImage(image, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
     }
 }
