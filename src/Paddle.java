@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -18,8 +17,8 @@ public class Paddle extends Collidable{
 	
 	private int score = 0;
 	
-	public static final int PADDLE_HEIGHT = 50;
-	public static final int PADDLE_WIDTH = 10;
+	public static final int PADDLE_HEIGHT = 60;
+	public static final int PADDLE_WIDTH = 14;
 	private int dY;
 	
 	public Paddle(Game game, int x, int y) {
@@ -75,8 +74,8 @@ public class Paddle extends Collidable{
 	
 	public void paint(Graphics2D g, int textureColor) throws IOException {
 		
-		int width = 10;
-		int height= 50;
+		int width = PADDLE_WIDTH + 20;
+		int height= PADDLE_HEIGHT + 50;
 		
 		BufferedImage image = new BufferedImage(1, 1, 1); 
 		switch(textureColor){

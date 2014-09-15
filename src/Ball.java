@@ -105,14 +105,14 @@ public class Ball extends Collidable{
 	// method painting the ball
 	public void paint(Graphics2D g) throws IOException {
 		
-		int width =10;
-		int height=10;
+		int width =30;
+		int height=30;
 		
 		BufferedImage ball = ImageIO.read(new File("images/ball.png")); 
 		TexturePaint texture = 
 		 new TexturePaint(ball, 
 		          new Rectangle(0, 0, width, height));
 		g.setPaint(texture);
-		g.fillOval(positionX - 5, positionY - 5, 10, 10);
+		g.fillOval(positionX - 5, positionY - 5, 20, 20);
 	}
 }
