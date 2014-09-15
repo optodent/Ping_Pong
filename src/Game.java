@@ -17,7 +17,7 @@ public class Game extends JPanel{
 	
 	public static final int GAME_HEIGHT = 350;
 	public static final int GAME_WIDTH = 600;
-	public static final int SLEEP_TIME = 30;
+	public static final int SLEEP_TIME = 80;
 	private static final int SCORE_MESSAGE_SHOWTIME = 2000;
 	
 	public Ball ball;
@@ -115,17 +115,15 @@ public class Game extends JPanel{
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-
 		try {
 			ball.paint(g2d);
+			paddle1.paint(g2d, 0);
+			paddle2.paint(g2d, 1);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		timer.paint(g2d);
-
-		paddle1.paint(g2d);
-		paddle2.paint(g2d);
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
@@ -134,20 +132,34 @@ public class Game extends JPanel{
 		game.setOpaque(false); 
 		Game.running = false;
 		
+		double mSperFrame = 1 / 60.0 * 1000;
+		long before = System.currentTimeMillis();
+		double lag = 0.0;
+		
 		while(game.paddle1.getScore() < 6 && game.paddle2.getScore() < 6){
 			
-			long before = System.nanoTime();
-			if (running) {
-				game.move();
-				game.repaint();
-				game.detectCollisions();
-				game.timeRefresh();
+			boolean shouldRender = false;
+			long now = System.currentTimeMillis();
+			long elapsed = now - before;
+			before = now;
+			lag += elapsed;
+			
+			while (lag >= mSperFrame) {
+				lag -= mSperFrame;
+				
+				if (running) {
+					game.move();
+					//game.repaint();
+					game.detectCollisions();
+					game.timeRefresh();
+					shouldRender = true;
+				}
 			}
-			long now = System.nanoTime();
-			long elapsed = Math.round((now - before) / 1000000.0);
-
-			Thread.sleep(SLEEP_TIME - elapsed);
+			
+			if (shouldRender) {
+				game.repaint();
+				shouldRender = false;
+			}
 		}	
 	}	
-
 }

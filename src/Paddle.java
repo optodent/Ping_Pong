@@ -1,6 +1,13 @@
-import java.awt.Color;
+
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.TexturePaint;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 
 public class Paddle extends Collidable{
@@ -62,9 +69,24 @@ public class Paddle extends Collidable{
 		
 	}
 	
-	public void paint(Graphics2D g) {
-		g.setColor(new Color(255, 51, 0));
-		g.fillRect(positionX, positionY, PADDLE_WIDTH, PADDLE_HEIGHT);
+	public void paint(Graphics2D g, int textureColor) throws IOException {
+		
+		int width = 20;
+		int height= 100;
+		
+		BufferedImage image = new BufferedImage(1, 1, 1); 
+		switch(textureColor){
+			case 0:
+				image = ImageIO.read(new File("images/red-stripes.png"));break;
+			case 1:
+				image = ImageIO.read(new File("images/yellow-stripes.jpg"));break;
+		}
+		
+		TexturePaint texture = 
+		 new TexturePaint(image, 
+		          new Rectangle(0, 0, width, height));
+		g.setPaint(texture);
+		g.fillRoundRect(positionX, positionY, PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_WIDTH / 2, PADDLE_WIDTH / 2);
 	}
 
 	

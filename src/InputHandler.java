@@ -10,22 +10,22 @@ public class InputHandler implements KeyListener {
 
         if (key == KeyEvent.VK_UP)
         {
-        	Game.game.paddle2.setdY(-4);
+        	Game.game.paddle2.setdY(-2);
         }
 
         if (key == KeyEvent.VK_DOWN)
         {
-        	Game.game.paddle2.setdY(4);
+        	Game.game.paddle2.setdY(2);
         }
         
         if (key == KeyEvent.VK_W)
         {
-            Game.game.paddle1.setdY(-4);
+            Game.game.paddle1.setdY(-2);
         }
 
         if (key == KeyEvent.VK_S)
         {
-        	Game.game.paddle1.setdY(4);
+        	Game.game.paddle1.setdY(2);
         }
         
         if (key == KeyEvent.VK_SPACE)
