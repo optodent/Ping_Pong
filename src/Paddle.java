@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -8,6 +9,9 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+
+import java.awt.geom.RoundRectangle2D;
+
 
 
 public class Paddle extends Collidable{
@@ -62,7 +66,7 @@ public class Paddle extends Collidable{
 		if ((this.positionY + dY) < 0) {
 			positionY = 0;
 		}else if ((this.positionY + dY) > Game.GAME_HEIGHT - PADDLE_HEIGHT + 1){
-			positionY = Game.GAME_HEIGHT - PADDLE_HEIGHT + 1;
+			positionY = Game.GAME_HEIGHT - PADDLE_HEIGHT;
 		}else{
 			positionY += dY;
 		}
@@ -71,15 +75,15 @@ public class Paddle extends Collidable{
 	
 	public void paint(Graphics2D g, int textureColor) throws IOException {
 		
-		int width = 20;
-		int height= 100;
+		int width = 10;
+		int height= 50;
 		
 		BufferedImage image = new BufferedImage(1, 1, 1); 
 		switch(textureColor){
 			case 0:
 				image = ImageIO.read(new File("images/red-stripes.png"));break;
 			case 1:
-				image = ImageIO.read(new File("images/yellow-stripes.jpg"));break;
+				image = ImageIO.read(new File("images/yellow-stripes.png"));break;
 		}
 		
 		TexturePaint texture = 
@@ -87,6 +91,9 @@ public class Paddle extends Collidable{
 		          new Rectangle(0, 0, width, height));
 		g.setPaint(texture);
 		g.fillRoundRect(positionX, positionY, PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_WIDTH / 2, PADDLE_WIDTH / 2);
+		g.setPaint(Color.black);
+		RoundRectangle2D border = new RoundRectangle2D.Double(positionX, positionY, PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_WIDTH / 2, PADDLE_WIDTH / 2);
+		g.draw(border);
 	}
 
 	
