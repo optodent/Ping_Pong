@@ -92,7 +92,7 @@ public class Ball extends Collidable{
 			
 			game.setScorePlayer1(sc);
 			game.setScoreMessage(1);
-			game.lastScoreTime = System.nanoTime();
+			game.lastScoreTime = System.currentTimeMillis();
 		}
 		if (positionY + vellY < 0)
 			vellY = 1;
