@@ -12,7 +12,6 @@ import javax.imageio.ImageIO;
 import java.awt.geom.RoundRectangle2D;
 
 
-
 public class Paddle extends Collidable{
 	
 	private int score = 0;

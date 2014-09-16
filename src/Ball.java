@@ -71,28 +71,28 @@ public class Ball extends Collidable{
 	void move() {
 		if (positionX + vellX < 0){
 			vellX = 1;
-			int sc = game.paddle2.getScore();
+			int sc = game.getPaddle2().getScore();
 			sc++;
-			game.paddle2.setScore(sc);
+			game.getPaddle2().setScore(sc);
 			lastScore = 2;
-			game.ball = new Ball(game);
+			game.setBall(new Ball(game));
 			
 			game.setScorePlayer2(sc);
 			game.setScoreMessage(2);
-			game.lastScoreTime = System.currentTimeMillis();
+			game.setLastScoreTime();
 		}
 			
 		if (positionX + vellX > Game.GAME_WIDTH - 10){
 			vellX = -1;
-			int sc = game.paddle1.getScore();
+			int sc = game.getPaddle1().getScore();
 			sc++;
-			game.paddle1.setScore(sc);
+			game.getPaddle1().setScore(sc);
 			lastScore = 1;
-			game.ball = new Ball(game);
+			game.setBall(new Ball(game));
 			
 			game.setScorePlayer1(sc);
 			game.setScoreMessage(1);
-			game.lastScoreTime = System.currentTimeMillis();
+			game.setLastScoreTime();
 		}
 		if (positionY + vellY < 0)
 			vellY = 1;

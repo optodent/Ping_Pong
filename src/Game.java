@@ -9,22 +9,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
+@SuppressWarnings("serial")
 public class Game extends JPanel{
 	
-	private static final long serialVersionUID = 1L;
-
-	public static Game game;
+	private static Game game;
 	
 	public static final int GAME_HEIGHT = 450;
 	public static final int GAME_WIDTH = 800;
 	public static final int SLEEP_TIME = 80;
-	private static final int SCORE_MESSAGE_SHOWTIME = 2000;
+	public static final int SCORE_MESSAGE_SHOWTIME = 2500;
 	
-	public Ball ball;
-	public Timere timer;
-	public Paddle paddle1;
-	public Paddle paddle2;
-	public long lastScoreTime = System.currentTimeMillis();
+	private Ball ball;
+	private Timere timer;
+	private Paddle paddle1;
+	private Paddle paddle2;
+	private long lastScoreTime = System.currentTimeMillis();
 	
 	private JLabel scoreMessage;
 	private JLabel scorePlayer1;
@@ -51,18 +50,41 @@ public class Game extends JPanel{
 		scorePlayer1 = new JLabel("Score: " + 0);	
 		scorePlayer1.setBounds(15, GAME_HEIGHT, GAME_WIDTH / 8, 30);		
 		frame.getContentPane().add(scorePlayer1);
-		
+
 		scorePlayer2 = new JLabel("Score: " + 0);	
-		scorePlayer2.setBounds(GAME_WIDTH / 8 * 7, GAME_HEIGHT, GAME_WIDTH / 8, 30);		
+		scorePlayer2.setBounds(GAME_WIDTH / 8 * 7 + 20, GAME_HEIGHT, GAME_WIDTH / 8, 30);		
 		frame.getContentPane().add(scorePlayer2);
 		
-		scoreMessage = new JLabel();
+		scoreMessage = new JLabel(" ");
+		scoreMessage.setBounds(GAME_WIDTH / 8 * 3, GAME_HEIGHT, GAME_WIDTH / 2, 30);
+		frame.getContentPane().add(scoreMessage);
 		
 		ImagePanel panel = new ImagePanel("images/background.png");
 		panel.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		
 	}
+	
+	public void setBall(Ball ball){
+		this.ball = ball;
+	}
+	
+	public void setLastScoreTime(){
+		this.lastScoreTime = System.currentTimeMillis();
+	}
+	
+	public Paddle getPaddle1(){
+		return this.paddle1;
+	}
+	
+	public Paddle getPaddle2(){
+		return this.paddle2;
+	}
+	
+	public static Game getGame(){
+		return Game.game;
+	}
+	
 	private void detectCollisions(){
 		
 		if (ball.Intersect(paddle1)) {
@@ -83,27 +105,19 @@ public class Game extends JPanel{
 	}
 	
 	public void setScorePlayer1(int score){
-		frame.getContentPane().remove(scorePlayer1);
-		scorePlayer1 = new JLabel("Score: " + score);
-		scorePlayer1.setBounds(15, GAME_HEIGHT, GAME_WIDTH / 8, 30);
-		frame.getContentPane().add(scorePlayer1);
+		scorePlayer1.setText("Score: " + score);
 	}
 	
 	public void setScorePlayer2(int score){
-		frame.getContentPane().remove(scorePlayer2);
-		scorePlayer2 = new JLabel("Score: " + score);
-		scorePlayer2.setBounds(GAME_WIDTH / 8 * 7, GAME_HEIGHT, GAME_WIDTH / 8, 30);
-		frame.getContentPane().add(scorePlayer2);
+		scorePlayer2.setText("Score: " + score);
 	}
 	
 	public void setScoreMessage(int player){
-		scoreMessage = new JLabel("Player " + player + " scored a goal !!!");
-		scoreMessage.setBounds(GAME_WIDTH / 8 * 3, GAME_HEIGHT, GAME_WIDTH / 2, 30);
-		frame.getContentPane().add(scoreMessage);
+		scoreMessage.setText("Player " + player + " scored a goal !!!");
 	}
 	
 	public void deleteScoreMessage(){
-		frame.getContentPane().remove(scoreMessage);
+		scoreMessage.setText(" ");
 	}
 
 	private void timeRefresh () {
@@ -122,7 +136,6 @@ public class Game extends JPanel{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		timer.paint(g2d);
 	}
 	
@@ -131,7 +144,7 @@ public class Game extends JPanel{
 		game = new Game();
 		game.setOpaque(false); 
 		Game.running = false;
-		
+
 		double mSperFrame = 1 / 60.0 * 1000;
 		long before = System.currentTimeMillis();
 		double lag = 0.0;
@@ -149,7 +162,6 @@ public class Game extends JPanel{
 				
 				if (running) {
 					game.move();
-					//game.repaint();
 					game.detectCollisions();
 					game.timeRefresh();
 					shouldRender = true;
