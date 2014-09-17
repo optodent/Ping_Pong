@@ -14,10 +14,10 @@ public class Timere {
 	private long seconds = 0;
 	
 	void refresh() {
-		currentTime = -startTime + System.currentTimeMillis();
+		currentTime = System.currentTimeMillis()-startTime;
 		minutes = currentTime/60000;
 		seconds = (currentTime%60000)/1000;
-		Date a = new Date();
+		
 		
 	}
 	
