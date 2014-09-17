@@ -94,8 +94,7 @@ public class Application extends JFrame{
 			break;
 		case PingPongState:
 			game.move();
-			game.detectCollisions();
-			game.timeRefresh();break;
+			game.detectCollisions();;break;
 		case VictoryState:
 			break;
 		}

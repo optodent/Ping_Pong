@@ -13,22 +13,22 @@ public class InputHandler implements KeyListener {
 			
 	        if (key == KeyEvent.VK_UP)
 	        {
-	        	Application.getGame().getPaddle2().setdY(-2);
+	        	Application.getGame().getPaddle2().setdY(-3);
 	        }
 	
 	        if (key == KeyEvent.VK_DOWN)
 	        {
-	        	Application.getGame().getPaddle2().setdY(2);
+	        	Application.getGame().getPaddle2().setdY(3);
 	        }
 	        
 	        if (key == KeyEvent.VK_W)
 	        {
-	        	Application.getGame().getPaddle1().setdY(-2);
+	        	Application.getGame().getPaddle1().setdY(-3);
 	        }
 	
 	        if (key == KeyEvent.VK_S)
 	        {
-	        	Application.getGame().getPaddle1().setdY(2);
+	        	Application.getGame().getPaddle1().setdY(3);
 	        }
 	        //adding the pause key
 	        if (key == KeyEvent.VK_SPACE)

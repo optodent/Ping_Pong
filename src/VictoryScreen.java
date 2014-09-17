@@ -19,7 +19,7 @@ public class VictoryScreen extends JPanel{
 		
 		winMessage = new JLabel(" ");	
 		winMessage.setFont(new Font("Courier New", Font.ITALIC, 25));
-		winMessage.setBounds(Game.GAME_WIDTH / 3 + 40, Game.GAME_HEIGHT + 10, Game.GAME_WIDTH / 2, 20);
+		winMessage.setBounds(Game.GAME_WIDTH / 3 + 40, Game.GAME_HEIGHT + 10, Game.GAME_WIDTH / 2, 40);
 		add(winMessage);
 		
 		JLabel menuOption = new JLabel("press M to go back to menu");	

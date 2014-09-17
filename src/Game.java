@@ -18,7 +18,6 @@ public class Game extends JPanel{
 	public static final int SCORE_MESSAGE_SHOWTIME = 2500;
 	
 	private Ball ball;
-	private Timere timer;
 	private Paddle paddle1;
 	private Paddle paddle2;
 	private long lastScoreTime = System.currentTimeMillis();
@@ -35,7 +34,6 @@ public class Game extends JPanel{
 		running = false;
 		
 		ball = new Ball(this);
-		timer = new Timere();
 		
 		paddle1 = new Paddle(this, 10 , GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
 		paddle2 = new Paddle(this, GAME_WIDTH - 5 - Paddle.PADDLE_WIDTH - 5, GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
@@ -145,10 +143,6 @@ public class Game extends JPanel{
 		scoreMessage.setText(" ");
 	}
 
-	public void timeRefresh () {
-		timer.refresh();
-	}
-	
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
@@ -161,7 +155,6 @@ public class Game extends JPanel{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		timer.paint(g2d);
 	}
 	
 }
