@@ -1,4 +1,6 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -11,7 +13,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class Game extends JPanel{
 	
-	public static Game game;
+	//public static Game game;
 	
 	public static final int GAME_HEIGHT = 450;
 	public static final int GAME_WIDTH = 800;
@@ -27,7 +29,6 @@ public class Game extends JPanel{
 	private JLabel scoreMessage;
 	private JLabel scorePlayer1;
 	private JLabel scorePlayer2;
-	//private static JFrame frame;
 	
 	public static boolean running = true;
 	
@@ -51,8 +52,21 @@ public class Game extends JPanel{
 		add(scorePlayer2);
 		
 		scoreMessage = new JLabel(" ");
-		scoreMessage.setBounds(GAME_WIDTH / 8 * 3, GAME_HEIGHT, GAME_WIDTH / 2, 30);
+		scoreMessage.setFont(new Font("Courier New", Font.ITALIC, 20));
+		scoreMessage.setBounds(GAME_WIDTH / 8 * 3 - 20, GAME_HEIGHT + 5, GAME_WIDTH / 2, 30);
 		add(scoreMessage);
+		
+		JLabel pressExit = new JLabel("X - exit game");	
+		pressExit.setBounds(GAME_WIDTH / 8 - 20, GAME_HEIGHT + 30, GAME_WIDTH / 4, 30);		
+		add(pressExit);
+		
+		JLabel pressMenu = new JLabel("M - menu");	
+		pressMenu.setBounds(GAME_WIDTH / 8 * 4 - 20, GAME_HEIGHT + 30, GAME_WIDTH / 4, 30);		
+		add(pressMenu);
+		
+		JLabel pressPause = new JLabel("SPACE - pause / center kick");	
+		pressPause.setBounds(GAME_WIDTH / 8 * 6 - 50, GAME_HEIGHT + 30, GAME_WIDTH / 4, 30);		
+		add(pressPause);
 		
 		ImagePanel panel = new ImagePanel("images/background.png");
 		panel.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
@@ -76,9 +90,9 @@ public class Game extends JPanel{
 		return this.paddle2;
 	}
 	
-	public static Game getGame(){
-		return Game.game;
-	}
+	//public static Game getGame(){
+		//return Game.game;
+	//}
 	
 	public void detectCollisions(){
 		
@@ -91,6 +105,16 @@ public class Game extends JPanel{
 	}
 	
 	public void move(){
+		
+		if (paddle1.getScore() == 6){
+			Application.changeGameState(Application.GameState.VictoryState);
+			Application.getVictory().setWinnerMessage("1");
+
+		}else if(paddle2.getScore() == 6){
+			Application.changeGameState(Application.GameState.VictoryState);
+			Application.getVictory().setWinnerMessage("1");
+		}
+		
 		ball.move();
 		paddle1.move();
 		paddle2.move();
@@ -108,6 +132,11 @@ public class Game extends JPanel{
 	}
 	
 	public void setScoreMessage(int player){
+		if (player == 1) {
+			scoreMessage.setForeground(Color.red);
+		}else{
+			scoreMessage.setForeground(new Color(182, 177, 21));
+		}
 		scoreMessage.setText("Player " + player + " scored a goal !!!");
 	}
 	

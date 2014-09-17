@@ -21,11 +21,11 @@ public class Menu extends JPanel{
 		add(panel, BorderLayout.CENTER);
 			
 		menuOption1 = new JLabel("press G for new game");	
-		menuOption1.setBounds(15, Game.GAME_HEIGHT, Game.GAME_WIDTH / 2, 20);
+		menuOption1.setBounds(100, Game.GAME_HEIGHT + 15, Game.GAME_WIDTH / 2, 20);
 		add(menuOption1);
 		
-		menuOption2 = new JLabel("press X to exit(not working)");	
-		menuOption2.setBounds(Game.GAME_WIDTH / 2, Game.GAME_HEIGHT, Game.GAME_WIDTH / 2, 20);
+		menuOption2 = new JLabel("press X to exit");	
+		menuOption2.setBounds(Game.GAME_WIDTH - 300, Game.GAME_HEIGHT + 15, Game.GAME_WIDTH / 2, 20);
 		add(menuOption2);
 		
 	}

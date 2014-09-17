@@ -8,9 +8,10 @@ public class Application extends JFrame{
 	private static Application app;
 	private static Game game;
 	private static Menu menu;
+	private static VictoryScreen victory;
 	
 	public static enum GameState {
-	    MenuState, PingPongState;
+	    MenuState, PingPongState, VictoryState;
 	}
 	
 	private static GameState currentState;
@@ -19,7 +20,8 @@ public class Application extends JFrame{
 
 		menu = new Menu();
 		game = new Game();
-
+		victory = new VictoryScreen();
+		
 		setSize(Game.GAME_WIDTH, Game.GAME_HEIGHT + 60);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,6 +29,14 @@ public class Application extends JFrame{
 		addKeyListener(ih);
 		
 		currentState = GameState.PingPongState;
+	}
+	
+	public static Application  getApplication(){
+		return app;
+	}
+	
+	public static VictoryScreen getVictory(){
+		return victory;
 	}
 	
 	public static Game getGame(){
@@ -82,6 +92,8 @@ public class Application extends JFrame{
 			game.move();
 			game.detectCollisions();
 			game.timeRefresh();break;
+		case VictoryState:
+			break;
 		}
 	}
 	
@@ -92,6 +104,8 @@ public class Application extends JFrame{
 			break;
 		case PingPongState:
 			game.repaint();break;
+		case VictoryState:
+			break;
 		}
 	}
 	
@@ -100,15 +114,18 @@ public class Application extends JFrame{
 
 		app.remove(game);
 		app.remove(menu);
+		app.remove(victory);
 		app.revalidate();
 		app.repaint();
 		
 		switch(state){
 		case MenuState:
-			menu = new Menu();
+			game = new Game();
 			app.add(menu); break;
 		case PingPongState:
 			app.add(game); break;
+		case VictoryState:
+			app.add(victory); break;
 		}
 		
 		app.revalidate();

@@ -40,6 +40,16 @@ public class InputHandler implements KeyListener {
         {
         	Application.changeGameState(Application.GameState.PingPongState);
         }
+        
+        if (key == KeyEvent.VK_M)
+        {
+        	Application.changeGameState(Application.GameState.MenuState);
+        }
+        
+        if (key == KeyEvent.VK_X)
+        {
+        	Application.getApplication().dispose();
+        }
 		
 	}
 
