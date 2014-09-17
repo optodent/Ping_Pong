@@ -11,15 +11,15 @@ import javax.imageio.ImageIO;
 
 import java.awt.geom.RoundRectangle2D;
 
-
+//detects if the ball is on the paddle from the Collidable class
 public class Paddle extends Collidable{
 	
 	private int score = 0;
-	
+	//paddle size
 	public static final int PADDLE_HEIGHT = 60;
 	public static final int PADDLE_WIDTH = 14;
 	private int dY;
-	
+	//paddle position
 	public Paddle(Game game, int x, int y) {
 		setX(x);
 		setY(y);
@@ -60,7 +60,7 @@ public class Paddle extends Collidable{
 		this.score = score;
 	}
 	public void move(){
-		
+	
 		if ((this.positionY + dY) < 0) {
 			positionY = 0;
 		}else if ((this.positionY + dY) > Game.GAME_HEIGHT - PADDLE_HEIGHT + 1){
@@ -70,7 +70,7 @@ public class Paddle extends Collidable{
 		}
 		
 	}
-	
+	// painting the paddles /paddle graphics/ using image from file
 	public void paint(Graphics2D g, int textureColor) throws IOException {
 		
 		int width = PADDLE_WIDTH + 20;

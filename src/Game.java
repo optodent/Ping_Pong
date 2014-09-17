@@ -13,12 +13,12 @@ import javax.swing.JPanel;
 public class Game extends JPanel{
 	
 	private static Game game;
-	
+	//setting the size of the game windows
 	public static final int GAME_HEIGHT = 450;
 	public static final int GAME_WIDTH = 800;
 	public static final int SLEEP_TIME = 80;
 	public static final int SCORE_MESSAGE_SHOWTIME = 2500;
-	
+	//setting components of the game
 	private Ball ball;
 	private Timere timer;
 	private Paddle paddle1;
@@ -31,7 +31,7 @@ public class Game extends JPanel{
 	private JFrame frame;
 	
 	public static boolean running = true;
-	
+	//adding the components of the game from the other classes:
 	public Game(){
 		ball = new Ball(this);
 		timer = new Timere();
@@ -123,10 +123,11 @@ public class Game extends JPanel{
 	private void timeRefresh () {
 		timer.refresh();
 	}
-	
+	//painting graphics using super paint to remove the traces form the movement
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
+		//making the game smoothly
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		try {
@@ -140,7 +141,7 @@ public class Game extends JPanel{
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
-		
+		//starting the game 
 		game = new Game();
 		game.setOpaque(false); 
 		Game.running = false;
@@ -148,7 +149,8 @@ public class Game extends JPanel{
 		double mSperFrame = 1 / 60.0 * 1000;
 		long before = System.currentTimeMillis();
 		double lag = 0.0;
-		
+		// the game ends when someone of the players reaches score six, 
+		// so the game is running until this score
 		while(game.paddle1.getScore() < 6 && game.paddle2.getScore() < 6){
 			
 			boolean shouldRender = false;
@@ -167,7 +169,7 @@ public class Game extends JPanel{
 					shouldRender = true;
 				}
 			}
-			
+			//repaint the game after reaching the high score
 			if (shouldRender) {
 				game.repaint();
 				shouldRender = false;

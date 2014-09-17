@@ -3,8 +3,10 @@ import java.awt.event.KeyListener;
 
 
 public class InputHandler implements KeyListener {
-
+//setting the keys for playing the game
 	@Override
+	
+	// detecting the pressed keys
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 
@@ -27,7 +29,7 @@ public class InputHandler implements KeyListener {
         {
         	Game.getGame().getPaddle1().setdY(2);
         }
-        
+        //adding the pause key
         if (key == KeyEvent.VK_SPACE)
         {
         	Game.running = ! Game.running;
@@ -36,6 +38,7 @@ public class InputHandler implements KeyListener {
 	}
 
 	@Override
+	//releasing the keys
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 

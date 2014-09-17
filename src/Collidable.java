@@ -1,5 +1,5 @@
 import java.awt.Point;
-
+//detecting if the ball in on the paddle
 public class Collidable {
 
 	protected Point min;

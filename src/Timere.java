@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.font.TextAttribute;
 import java.text.AttributedString;
-
+//adding a timer for the game
 public class Timere {
 	private long currentTime = 0;
 	
@@ -23,7 +23,7 @@ public class Timere {
 		AttributedString as = new AttributedString(time);
 		as.addAttribute(TextAttribute.SIZE, 20);
 		as.addAttribute(TextAttribute.FOREGROUND, Color.white);
-		
+		//setting the timer on the screen
 		g.drawString(as.getIterator(), 520, 30);
 	}
 }
