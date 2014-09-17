@@ -28,7 +28,7 @@ public class Application extends JFrame{
 		InputHandler ih = new InputHandler();
 		addKeyListener(ih);
 		
-		currentState = GameState.PingPongState;
+		currentState = GameState.MenuState;
 	}
 	
 	public static Application  getApplication(){
@@ -47,6 +47,10 @@ public class Application extends JFrame{
 		game = new Game();
 	}
 	
+	public static GameState getCurrentState(){
+		return currentState;
+	}
+	
 	public static void main(String[] args) throws InterruptedException {
 		
 		app = new Application();
@@ -54,7 +58,7 @@ public class Application extends JFrame{
 		app.add(menu);
 		app.revalidate();
 		app.repaint();
-			
+
 		double mSperFrame = 1 / 60.0 * 1000;
 		long before = System.currentTimeMillis();
 		double lag = 0.0;
@@ -70,7 +74,7 @@ public class Application extends JFrame{
 			while (lag >= mSperFrame) {
 				lag -= mSperFrame;
 				
-				if (Game.running) {
+				if (Game.getRunning()) {
 					app.updateGame();
 					shouldRender = true;
 				}

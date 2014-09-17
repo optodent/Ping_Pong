@@ -13,11 +13,8 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class Game extends JPanel{
 	
-	//public static Game game;
-	
 	public static final int GAME_HEIGHT = 450;
 	public static final int GAME_WIDTH = 800;
-	public static final int SLEEP_TIME = 80;
 	public static final int SCORE_MESSAGE_SHOWTIME = 2500;
 	
 	private Ball ball;
@@ -30,7 +27,7 @@ public class Game extends JPanel{
 	private JLabel scorePlayer1;
 	private JLabel scorePlayer2;
 	
-	public static boolean running = true;
+	private static boolean running = true;
 	
 	public Game(){
 		setLayout(null);
@@ -74,6 +71,14 @@ public class Game extends JPanel{
 		
 	}
 	
+	public static boolean getRunning(){
+		return running;
+	}
+	
+	public static void setRunning(boolean run){
+		running = run;
+	}
+	
 	public void setBall(Ball ball){
 		this.ball = ball;
 	}
@@ -89,10 +94,6 @@ public class Game extends JPanel{
 	public Paddle getPaddle2(){
 		return this.paddle2;
 	}
-	
-	//public static Game getGame(){
-		//return Game.game;
-	//}
 	
 	public void detectCollisions(){
 		
@@ -162,6 +163,5 @@ public class Game extends JPanel{
 		}
 		timer.paint(g2d);
 	}
-	
 	
 }
