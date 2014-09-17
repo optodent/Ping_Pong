@@ -17,6 +17,7 @@ public class Ball extends Collidable{
 	
 	private Game game;
 	private static Integer lastScore;
+	private static final int BALL_SPEED = 4; 
 	
 	//constructor for ball
 	public Ball(Game game) {
@@ -69,7 +70,7 @@ public class Ball extends Collidable{
 	
 	//method moving the ball
 	void move() {
-		if (positionX + vellX < 0){
+		if (positionX + BALL_SPEED < 0){
 			vellX = 1;
 			int sc = game.getPaddle2().getScore();
 			sc++;
@@ -82,7 +83,7 @@ public class Ball extends Collidable{
 			game.setLastScoreTime();
 		}
 			
-		if (positionX + vellX > Game.GAME_WIDTH - 10){
+		if (positionX  > Game.GAME_WIDTH - 10){
 			vellX = -1;
 			int sc = game.getPaddle1().getScore();
 			sc++;
@@ -94,13 +95,20 @@ public class Ball extends Collidable{
 			game.setScoreMessage(1);
 			game.setLastScoreTime();
 		}
-		if (positionY + vellY < 0)
+		if (positionY < 0)
 			vellY = 1;
-		if (positionY + vellY > Game.GAME_HEIGHT - 10)
+		if (positionY  > Game.GAME_HEIGHT - 10)
 			vellY = -1;
-			
-		positionX = positionX + vellX;
-		positionY = positionY + vellY;
+		if (vellX == 1){
+			positionX = positionX + BALL_SPEED;			
+		}else{
+			positionX = positionX - BALL_SPEED;
+		}
+		if (vellY == 1){
+			positionY = positionY + BALL_SPEED;			
+		}else{
+			positionY = positionY - BALL_SPEED;
+		}
 	}
 	// method painting the ball
 	public void paint(Graphics2D g) throws IOException {

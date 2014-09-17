@@ -16,7 +16,7 @@ public class Game extends JPanel{
 	
 	public static final int GAME_HEIGHT = 450;
 	public static final int GAME_WIDTH = 800;
-	public static final int SLEEP_TIME = 80;
+	public static final int SLEEP_TIME = 10;
 	public static final int SCORE_MESSAGE_SHOWTIME = 2500;
 	
 	private Ball ball;
