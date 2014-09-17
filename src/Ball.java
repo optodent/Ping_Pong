@@ -9,7 +9,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-// The class for the ball spcecifications
+// The class for the ball specifications
 public class Ball extends Collidable {
 
 	protected int vellX; // velocity direction x
@@ -21,7 +21,7 @@ public class Ball extends Collidable {
 
 	// constructor for ball
  
-	private static final int BALL_SPEED = 4; 
+	private static final int BALL_SPEED = 3; 
 	
 	//constructor for ball
  	public Ball(Game game) {
