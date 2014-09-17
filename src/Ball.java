@@ -95,6 +95,7 @@ public class Ball extends Collidable {
 			game.setScorePlayer2(sc);
 			game.setScoreMessage(2);
 			game.setLastScoreTime();
+			game.running = false;
 		}
 //!!!!
 			
@@ -110,6 +111,7 @@ public class Ball extends Collidable {
 			game.setScorePlayer1(sc);
 			game.setScoreMessage(1);
 			game.setLastScoreTime();
+			game.running = false;
 		}
 		if (positionY - 10 < 0)
 			vellY = 1;
