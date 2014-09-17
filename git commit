@@ -1,0 +1,246 @@
+[1mdiff --cc bin/Ball.class[m
+[1mindex abf1a72,e5f57f9..0000000[m
+Binary files differ
+[1mdiff --cc bin/Game.class[m
+[1mindex 56693ad,a2253b3..0000000[m
+Binary files differ
+[1mdiff --cc src/Ball.java[m
+[1mindex b4ca805,b71c8f4..0000000[m
+[1m--- a/src/Ball.java[m
+[1m+++ b/src/Ball.java[m
+[36m@@@ -9,76 -9,68 +9,82 @@@[m [mimport java.util.Random[m
+  [m
+  import javax.imageio.ImageIO;[m
+  [m
+[32m +// The class for the ball spcecifications[m
+[32m +public class Ball extends Collidable {[m
+[32m +[m
+[32m +	protected int vellX; // velocity direction x[m
+[32m +	protected int vellY; // velocity direction y[m
+  [m
+[31m -public class Ball extends Collidable{[m
+[31m -	[m
+[31m -	protected int vellX; 	//velocity direction x[m
+[31m -	protected int vellY;	// velocity direction y[m
+[31m -	[m
+  	private Game game;[m
+  	private static Integer lastScore;[m
+[32m++ [m
+[32m +[m
+[32m +	// constructor for ball[m
+[31m- 	public Ball(Game game) {[m
+[32m++ [m
+[32m+ 	private static final int BALL_SPEED = 4; [m
+[32m+ 	[m
+[32m+ 	//constructor for ball[m
+[31m -	public Ball(Game game) {[m
+[32m++ 	public Ball(Game game) {[m
+  		this.game = game;[m
+[31m -		this.min = new Point(0 , 0);[m
+[31m -		this.max = new Point(10 , 10);[m
+[31m -		[m
+[32m +		this.min = new Point(0, 0);[m
+[32m +		this.max = new Point(10, 10);[m
+[32m +		// random postition for starting the ball for game start or after scored[m
+[32m +		// goal[m
+  		Random rnd = new Random();[m
+  		int direction = rnd.nextInt(4);[m
+[31m -		[m
+[31m -		if (lastScore == null){[m
+[31m -			switch (direction){[m
+[31m -				case 0:[m
+[31m -					vellX = 1;[m
+[31m -					vellY = 1; break;[m
+[31m -				case 1:[m
+[31m -					vellX = 1;[m
+[31m -					vellY = -1; break;[m
+[31m -				case 2:[m
+[31m -					vellX = -1;[m
+[31m -					vellY = -1; break;[m
+[31m -				case 3:[m
+[31m -					vellX = -1;[m
+[31m -					vellY = 1; break;[m
+[31m -			}		[m
+[32m +[m
+[32m +		if (lastScore == null) {[m
+[32m +			switch (direction) {[m
+[32m +			case 0:[m
+[32m +				vellX = 1;[m
+[32m +				vellY = 1;[m
+[32m +				break;[m
+[32m +			case 1:[m
+[32m +				vellX = 1;[m
+[32m +				vellY = -1;[m
+[32m +				break;[m
+[32m +			case 2:[m
+[32m +				vellX = -1;[m
+[32m +				vellY = -1;[m
+[32m +				break;[m
+[32m +			case 3:[m
+[32m +				vellX = -1;[m
+[32m +				vellY = 1;[m
+[32m +				break;[m
+[32m +			}[m
+  		} else if (lastScore == 2) {[m
+[31m -			switch (direction){[m
+[31m -				case 0:[m
+[31m -				case 1:[m
+[31m -					vellX = 1;[m
+[31m -					vellY = 1; break;[m
+[31m -				case 2:[m
+[31m -				case 3:[m
+[31m -					vellX = 1;[m
+[31m -					vellY = -1; break;[m
+[31m -			}		[m
+[31m -		} else{[m
+[31m -			switch (direction){[m
+[31m -				case 0:[m
+[31m -				case 1:[m
+[31m -					vellX = -1;[m
+[31m -					vellY = -1; break;[m
+[31m -				case 2:[m
+[31m -				case 3:[m
+[31m -					vellX = -1;[m
+[31m -					vellY = 1; break;[m
+[32m +			switch (direction) {[m
+[32m +			case 0:[m
+[32m +			case 1:[m
+[32m +				vellX = 1;[m
+[32m +				vellY = 1;[m
+[32m +				break;[m
+[32m +			case 2:[m
+[32m +			case 3:[m
+[32m +				vellX = 1;[m
+[32m +				vellY = -1;[m
+[32m +				break;[m
+[32m +			}[m
+[32m +		} else {[m
+[32m +			switch (direction) {[m
+[32m +			case 0:[m
+[32m +			case 1:[m
+[32m +				vellX = -1;[m
+[32m +				vellY = -1;[m
+[32m +				break;[m
+[32m +			case 2:[m
+[32m +			case 3:[m
+[32m +				vellX = -1;[m
+[32m +				vellY = 1;[m
+[32m +				break;[m
+  			}[m
+  		}[m
+  	}[m
+[31m -	[m
+[31m -	//method moving the ball[m
+[32m +[m
+[32m +	// Detecting goal and scoring first player[m
+  	void move() {[m
+[31m- 		if (positionX + vellX < 0) {[m
+[32m+ 		if (positionX + BALL_SPEED < 0){[m
+[32m++[m
+  			vellX = 1;[m
+  			int sc = game.getPaddle2().getScore();[m
+  			sc++;[m
+[36m@@@ -90,8 -82,8 +96,10 @@@[m
+  			game.setScoreMessage(2);[m
+  			game.setLastScoreTime();[m
+  		}[m
+[31m- 		//Detecting goal and scoring second player [m
+[31m- 		if (positionX + vellX > Game.GAME_WIDTH - 10) {[m
+[32m++//!!!![m
+[32m+ 			[m
+[32m+ 		if (positionX  > Game.GAME_WIDTH - 10){[m
+[32m++ [m
+  			vellX = -1;[m
+  			int sc = game.getPaddle1().getScore();[m
+  			sc++;[m
+[36m@@@ -103,24 -95,31 +111,33 @@@[m
+  			game.setScoreMessage(1);[m
+  			game.setLastScoreTime();[m
+  		}[m
+[31m- 		if (positionY + vellY < 0)[m
+[32m+ 		if (positionY < 0)[m
+  			vellY = 1;[m
+[31m- 		if (positionY + vellY > Game.GAME_HEIGHT - 10)[m
+[32m+ 		if (positionY  > Game.GAME_HEIGHT - 10)[m
+  			vellY = -1;[m
+[32m +[m
+[31m- 		positionX = positionX + vellX;[m
+[31m- 		positionY = positionY + vellY;[m
+[32m+ 		if (vellX == 1){[m
+[32m+ 			positionX = positionX + BALL_SPEED;			[m
+[32m+ 		}else{[m
+[32m+ 			positionX = positionX - BALL_SPEED;[m
+[32m+ 		}[m
+[32m+ 		if (vellY == 1){[m
+[32m+ 			positionY = positionY + BALL_SPEED;			[m
+[32m+ 		}else{[m
+[32m+ 			positionY = positionY - BALL_SPEED;[m
+[32m+ 		}[m
+[32m++[m
+  	}[m
+[31m -	// method painting the ball[m
+[32m +[m
+[32m +	// method painting the ball and texture[m
+  	public void paint(Graphics2D g) throws IOException {[m
+[31m -		[m
+[31m -		int width =30;[m
+[31m -		int height=30;[m
+[31m -		[m
+[31m -		BufferedImage ball = ImageIO.read(new File("images/ball.png")); [m
+[31m -		TexturePaint texture = [m
+[31m -		 new TexturePaint(ball, [m
+[31m -		          new Rectangle(0, 0, width, height));[m
+[32m +[m
+[32m +		int width = 30;[m
+[32m +		int height = 30;[m
+[32m +[m
+[32m +		BufferedImage ball = ImageIO.read(new File("images/ball.png"));[m
+[32m +		TexturePaint texture = new TexturePaint(ball, new Rectangle(0, 0,[m
+[32m +				width, height));[m
+  		g.setPaint(texture);[m
+  		g.fillOval(positionX - 5, positionY - 5, 20, 20);[m
+  	}[m
+[1mdiff --cc src/Timere.java[m
+[1mindex ff75462,95cc2c7..0000000[m
+[1m--- a/src/Timere.java[m
+[1m+++ b/src/Timere.java[m
+[36m@@@ -2,12 -2,20 +2,20 @@@[m [mimport java.awt.Color[m
+  import java.awt.Graphics2D;[m
+  import java.awt.font.TextAttribute;[m
+  import java.text.AttributedString;[m
+[31m -[m
+[32m +//adding a timer for the game[m
+  public class Timere {[m
+[32m+ 	public Timere(){[m
+[32m+ 		startTime = System.currentTimeMillis();[m
+[32m+ 	}[m
+  	private long currentTime = 0;[m
+[32m+ 	private long startTime = 0;[m
+[32m+ 	private long minutes = 0;[m
+[32m+ 	private long seconds = 0;[m
+  	[m
+  	void refresh() {[m
+[31m- 		currentTime ++;[m
+[32m+ 		currentTime = startTime - System.currentTimeMillis();[m
+[32m+ 		minutes = currentTime/60000;[m
+[32m+ 		seconds = (currentTime%60000)/1000;[m
+  	}[m
+  	[m
+  	public void paint(Graphics2D g) {[m
+[36m@@@ -23,7 -30,7 +30,12 @@@[m
+  		AttributedString as = new AttributedString(time);[m
+  		as.addAttribute(TextAttribute.SIZE, 20);[m
+  		as.addAttribute(TextAttribute.FOREGROUND, Color.white);[m
+[32m++ [m
+[32m +		//setting the timer on the screen[m
+[31m- 		g.drawString(as.getIterator(), 520, 30);[m
+[32m++		//g.drawString(as.getIterator(), 520, 30);[m
+[32m++ [m
+[32m+ 		[m
+[32m+ 		g.drawString(as.getIterator(), 620, 30);[m
+[32m++[m
+  	}[m
+  }[m
+[1mdiff --git a/bin/Timere.class b/bin/Timere.class[m
+[1mindex 48c57ea..949142c 100644[m
+Binary files a/bin/Timere.class and b/bin/Timere.class differ
