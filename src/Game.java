@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.io.IOException;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -12,13 +11,13 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class Game extends JPanel{
 	
-	private static Game game;
-	//setting the size of the game windows
+	public static Game game;
+	
 	public static final int GAME_HEIGHT = 450;
 	public static final int GAME_WIDTH = 800;
-	public static final int SLEEP_TIME = 10;
+	public static final int SLEEP_TIME = 80;
 	public static final int SCORE_MESSAGE_SHOWTIME = 2500;
-	//setting components of the game
+	
 	private Ball ball;
 	private Timere timer;
 	private Paddle paddle1;
@@ -28,40 +27,36 @@ public class Game extends JPanel{
 	private JLabel scoreMessage;
 	private JLabel scorePlayer1;
 	private JLabel scorePlayer2;
-	private JFrame frame;
+	//private static JFrame frame;
 	
 	public static boolean running = true;
-	//adding the components of the game from the other classes:
+	
 	public Game(){
+		setLayout(null);
+		setOpaque(false); 
+		running = false;
+		
 		ball = new Ball(this);
 		timer = new Timere();
 		
 		paddle1 = new Paddle(this, 10 , GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
 		paddle2 = new Paddle(this, GAME_WIDTH - 5 - Paddle.PADDLE_WIDTH - 5, GAME_HEIGHT / 2 - Paddle.PADDLE_HEIGHT / 2);
-		frame = new JFrame("PingPong");
-		frame.add(this);	
-		frame.setSize(GAME_WIDTH, GAME_HEIGHT + 60);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		InputHandler ih = new InputHandler();
-		frame.addKeyListener(ih);
-		frame.setLayout(null);
-	
+		
 		scorePlayer1 = new JLabel("Score: " + 0);	
-		scorePlayer1.setBounds(15, GAME_HEIGHT, GAME_WIDTH / 8, 30);		
-		frame.getContentPane().add(scorePlayer1);
+		scorePlayer1.setBounds(15, GAME_HEIGHT, GAME_WIDTH / 8, 30);
+		add(scorePlayer1);
 
 		scorePlayer2 = new JLabel("Score: " + 0);	
 		scorePlayer2.setBounds(GAME_WIDTH / 8 * 7 + 20, GAME_HEIGHT, GAME_WIDTH / 8, 30);		
-		frame.getContentPane().add(scorePlayer2);
+		add(scorePlayer2);
 		
 		scoreMessage = new JLabel(" ");
 		scoreMessage.setBounds(GAME_WIDTH / 8 * 3, GAME_HEIGHT, GAME_WIDTH / 2, 30);
-		frame.getContentPane().add(scoreMessage);
+		add(scoreMessage);
 		
 		ImagePanel panel = new ImagePanel("images/background.png");
 		panel.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		add(panel, BorderLayout.CENTER);
 		
 	}
 	
@@ -85,7 +80,7 @@ public class Game extends JPanel{
 		return Game.game;
 	}
 	
-	private void detectCollisions(){
+	public void detectCollisions(){
 		
 		if (ball.Intersect(paddle1)) {
 			ball.vellX  = +1;
@@ -95,12 +90,12 @@ public class Game extends JPanel{
 		}
 	}
 	
-	private void move(){
+	public void move(){
 		ball.move();
 		paddle1.move();
 		paddle2.move();
 		if (System.currentTimeMillis() - lastScoreTime > SCORE_MESSAGE_SHOWTIME) {
-			game.deleteScoreMessage();
+			Application.getGame().deleteScoreMessage();
 		}
 	}
 	
@@ -120,14 +115,13 @@ public class Game extends JPanel{
 		scoreMessage.setText(" ");
 	}
 
-	private void timeRefresh () {
+	public void timeRefresh () {
 		timer.refresh();
 	}
-	//painting graphics using super paint to remove the traces form the movement
+	
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
-		//making the game smoothly
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		try {
@@ -140,40 +134,5 @@ public class Game extends JPanel{
 		timer.paint(g2d);
 	}
 	
-	public static void main(String[] args) throws InterruptedException {
-		//starting the game 
-		game = new Game();
-		game.setOpaque(false); 
-		Game.running = false;
-
-		double mSperFrame = 1 / 60.0 * 1000;
-		long before = System.currentTimeMillis();
-		double lag = 0.0;
-		// the game ends when someone of the players reaches score six, 
-		// so the game is running until this score
-		while(game.paddle1.getScore() < 6 && game.paddle2.getScore() < 6){
-			
-			boolean shouldRender = false;
-			long now = System.currentTimeMillis();
-			long elapsed = now - before;
-			before = now;
-			lag += elapsed;
-			
-			while (lag >= mSperFrame) {
-				lag -= mSperFrame;
-				
-				if (running) {
-					game.move();
-					game.detectCollisions();
-					game.timeRefresh();
-					shouldRender = true;
-				}
-			}
-			//repaint the game after reaching the high score
-			if (shouldRender) {
-				game.repaint();
-				shouldRender = false;
-			}
-		}	
-	}	
+	
 }

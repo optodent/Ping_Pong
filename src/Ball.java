@@ -111,7 +111,7 @@ public class Ball extends Collidable {
 			game.setScoreMessage(1);
 			game.setLastScoreTime();
 		}
-		if (positionY < 0)
+		if (positionY - 10 < 0)
 			vellY = 1;
 		if (positionY  > Game.GAME_HEIGHT - 10)
 			vellY = -1;

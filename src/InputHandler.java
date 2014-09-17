@@ -6,33 +6,39 @@ public class InputHandler implements KeyListener {
 //setting the keys for playing the game
 	@Override
 	
+	
 	// detecting the pressed keys
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_UP)
         {
-        	Game.getGame().getPaddle2().setdY(-2);
+        	Application.getGame().getPaddle2().setdY(-2);
         }
 
         if (key == KeyEvent.VK_DOWN)
         {
-        	Game.getGame().getPaddle2().setdY(2);
+        	Application.getGame().getPaddle2().setdY(2);
         }
         
         if (key == KeyEvent.VK_W)
         {
-            Game.getGame().getPaddle1().setdY(-2);
+        	Application.getGame().getPaddle1().setdY(-2);
         }
 
         if (key == KeyEvent.VK_S)
         {
-        	Game.getGame().getPaddle1().setdY(2);
+        	Application.getGame().getPaddle1().setdY(2);
         }
         //adding the pause key
         if (key == KeyEvent.VK_SPACE)
         {
         	Game.running = ! Game.running;
+        }
+        
+        if (key == KeyEvent.VK_G)
+        {
+        	Application.changeGameState(Application.GameState.PingPongState);
         }
 		
 	}
@@ -44,26 +50,26 @@ public class InputHandler implements KeyListener {
 
         if (key == KeyEvent.VK_UP)
         {
-        	Game.getGame().getPaddle2().setdY(0);
+        	Application.getGame().getPaddle2().setdY(0);
         }
 
         if (key == KeyEvent.VK_DOWN)
         {
-        	Game.getGame().getPaddle2().setdY(0);
+        	Application.getGame().getPaddle2().setdY(0);
         }
         
         if (key == KeyEvent.VK_W)
         {
-        	Game.getGame().getPaddle1().setdY(0);
+        	Application.getGame().getPaddle1().setdY(0);
         }
 
         if (key == KeyEvent.VK_S)
         {
-        	Game.getGame().getPaddle1().setdY(0);
+        	Application.getGame().getPaddle1().setdY(0);
         }	
 	}
 	
 	@Override
 	public void keyTyped(KeyEvent e) {}
-
+	
 }
